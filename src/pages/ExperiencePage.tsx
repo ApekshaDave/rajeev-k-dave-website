@@ -3,7 +3,9 @@ import {
   Calendar, 
   MapPin, 
   CheckCircle2, 
-  ArrowRight 
+  Terminal,
+  Layers,
+  ArrowUpRight
 } from 'lucide-react';
 import { experienceData, impactMetrics } from '../data/experience';
 
@@ -76,27 +78,27 @@ export const ExperiencePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. INTERACTIVE CAREER TIMELINE (OPEN EDITORIAL, NO BOXES) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+      {/* 3. VISUAL CAREER TIMELINE */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <div className="border-t border-border/40 pt-16">
-          {/* Timeline Header & Filters */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-14 pb-6 border-b border-border/30">
+          {/* Timeline Header & Filter Controls */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-16 pb-6 border-b border-border/30">
             <div>
-              <h2 className="text-2xl font-heading font-bold text-text-primary">
-                Career Timeline
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-text-primary">
+                Chronological Career Timeline
               </h2>
               <p className="text-xs sm:text-sm text-text-secondary mt-1 font-light">
-                Verified leadership roles, architectural milestones and team expansions.
+                Follow the 20+ year evolution from mobile engineering and IoT to enterprise generative AI.
               </p>
             </div>
 
-            {/* Filter Buttons */}
+            {/* Filter Pills */}
             <div className="flex flex-wrap items-center gap-2">
               {(['All', 'AI & Data', 'DevOps & Architecture', 'Platform & Leadership'] as const).map((filter) => (
                 <button
                   key={filter}
                   onClick={() => setActiveRoleFilter(filter)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-heading font-medium transition-all ${
+                  className={`px-4 py-1.5 rounded-full text-xs font-heading font-medium transition-all ${
                     activeRoleFilter === filter
                       ? 'bg-accent-purple text-bg-primary font-semibold shadow-glow-purple'
                       : 'text-text-secondary hover:text-text-primary border border-border/50'
@@ -108,108 +110,141 @@ export const ExperiencePage: React.FC = () => {
             </div>
           </div>
 
-          {/* Timeline Items (Flowing, Open Layout) */}
-          <div className="relative pl-6 sm:pl-8 border-l border-border/40 space-y-16">
-            {filteredExperience.map((item) => (
-              <div key={item.id} className="relative group">
-                {/* Timeline Marker Dot */}
-                <div 
-                  className={`absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full border-2 transition-transform duration-300 group-hover:scale-125 ${
-                    item.isCurrent 
-                      ? 'bg-accent-orange border-accent-orange shadow-glow-orange' 
-                      : 'bg-bg-primary border-accent-purple group-hover:bg-accent-purple'
-                  }`}
-                />
+          {/* Timeline Container with Continuous Center/Side Spine */}
+          <div className="relative">
+            {/* The Continuous Vertical Timeline Spine */}
+            <div className="absolute left-4 md:left-[220px] top-3 bottom-8 w-[2px] bg-gradient-to-b from-accent-orange via-accent-purple to-border/40" />
 
-                {/* Experience Content (Unboxed) */}
-                <div className="space-y-6 pb-12 border-b border-border/20 last:border-none">
-                  {/* Header row */}
-                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-                    <div className="space-y-1">
-                      <div className="flex flex-wrap items-center gap-3">
-                        <h3 className="text-xl sm:text-2xl font-heading font-bold text-text-primary">
-                          {item.role}
-                        </h3>
-                        {item.isCurrent && (
-                          <span className="px-2.5 py-0.5 rounded-full bg-accent-orange/15 text-accent-orange border border-accent-orange/30 text-[10px] font-mono font-medium">
-                            Current Role
+            {/* Timeline Milestones */}
+            <div className="space-y-16 sm:space-y-20">
+              {filteredExperience.map((item, idx) => {
+                return (
+                  <div key={item.id} className="relative group grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-start">
+                    {/* Left Column: Date Range & Company Tag (Desktop) */}
+                    <div className="pl-12 md:pl-0 md:col-span-3 md:text-right space-y-1">
+                      <div className="inline-flex items-center gap-2 md:justify-end">
+                        <span className={`text-xs font-mono font-semibold tracking-wider ${
+                          item.isCurrent ? 'text-accent-orange' : 'text-text-primary'
+                        }`}>
+                          {item.period}
+                        </span>
+                      </div>
+                      <div className="text-xs font-mono text-text-muted flex items-center gap-1 md:justify-end">
+                        <MapPin className="w-3 h-3 text-accent-purple" />
+                        <span>{item.location}</span>
+                      </div>
+                      <div className="pt-1">
+                        <span className="text-[11px] font-heading font-semibold uppercase tracking-wider text-accent-purple/90 block">
+                          {item.company}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Timeline Node Icon / Marker on the Spine */}
+                    <div className="absolute left-[7px] md:left-[211px] top-1 z-10">
+                      {item.isCurrent ? (
+                        <div className="relative flex items-center justify-center">
+                          {/* Pulsing ring for current leadership position */}
+                          <span className="absolute w-6 h-6 rounded-full bg-accent-orange/30 animate-ping" />
+                          <span className="relative w-5 h-5 rounded-full bg-accent-orange border-2 border-bg-primary shadow-glow-orange flex items-center justify-center">
+                            <span className="w-1.5 h-1.5 rounded-full bg-bg-primary" />
                           </span>
-                        )}
-                      </div>
-                      <div className="text-base font-heading font-medium text-accent-purple">
-                        {item.company}
-                      </div>
+                        </div>
+                      ) : (
+                        <div className="relative flex items-center justify-center">
+                          <span className="w-5 h-5 rounded-full bg-bg-primary border-2 border-accent-purple group-hover:border-accent-orange group-hover:bg-accent-purple transition-all duration-300 flex items-center justify-center">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent-purple group-hover:bg-bg-primary" />
+                          </span>
+                        </div>
+                      )}
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-text-muted">
-                      <span className="flex items-center gap-1.5 text-text-secondary">
-                        <Calendar className="w-3.5 h-3.5 text-accent-purple" />
-                        {item.period}
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <MapPin className="w-3.5 h-3.5 text-accent-orange" />
-                        {item.location}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Summary */}
-                  <p className="text-sm text-text-secondary leading-relaxed font-light">
-                    {item.summary}
-                  </p>
-
-                  {/* Bullet Points */}
-                  <div className="space-y-2">
-                    <div className="text-xs font-mono uppercase tracking-wider text-text-muted">
-                      Key Accomplishments:
-                    </div>
-                    <ul className="space-y-2 text-sm text-text-secondary font-light">
-                      {item.highlights.map((point, pidx) => (
-                        <li key={pidx} className="flex items-start gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 text-accent-purple shrink-0 mt-0.5" />
-                          <span className="leading-relaxed">{point}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Project Highlight */}
-                  {item.projectHighlight && (
-                    <div className="p-5 rounded-2xl border-l-2 border-accent-purple space-y-2 bg-transparent">
-                      <div className="flex items-center gap-2 text-xs font-mono text-accent-purple font-semibold uppercase tracking-wider">
-                        <span>Project Highlight: {item.projectHighlight.title}</span>
+                    {/* Right Column: Role Title, Summary, Accomplishments & Tech */}
+                    <div className="pl-12 md:pl-0 md:col-span-9 space-y-5 pb-8 border-b border-border/20 last:border-none">
+                      {/* Role Header */}
+                      <div className="space-y-1">
+                        <div className="flex flex-wrap items-center gap-3">
+                          <h3 className="text-xl sm:text-2xl font-heading font-bold text-text-primary group-hover:text-accent-purple transition-colors">
+                            {item.role}
+                          </h3>
+                          {item.isCurrent && (
+                            <span className="px-2.5 py-0.5 rounded-full bg-accent-orange/15 text-accent-orange border border-accent-orange/30 text-[10px] font-mono font-medium">
+                              Active Leadership Role
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-sm text-text-secondary leading-relaxed font-light">
+                          {item.summary}
+                        </p>
                       </div>
-                      <p className="text-xs sm:text-sm text-text-secondary leading-relaxed font-light">
-                        {item.projectHighlight.description}
-                      </p>
-                      <ul className="space-y-1.5 text-xs text-text-muted font-light pt-1">
-                        {item.projectHighlight.points.map((pt, ptidx) => (
-                          <li key={ptidx} className="flex items-start gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent-orange shrink-0 mt-1" />
-                            <span>{pt}</span>
-                          </li>
+
+                      {/* Bullet Highlights */}
+                      <div className="space-y-2">
+                        <div className="text-[11px] font-mono uppercase tracking-wider text-text-muted">
+                          Key Deliverables & Architectural Milestones:
+                        </div>
+                        <ul className="space-y-2 text-sm text-text-secondary font-light">
+                          {item.highlights.map((point, pidx) => (
+                            <li key={pidx} className="flex items-start gap-2.5">
+                              <CheckCircle2 className="w-4 h-4 text-accent-purple shrink-0 mt-0.5" />
+                              <span className="leading-relaxed">{point}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Project Highlight Callout */}
+                      {item.projectHighlight && (
+                        <div className="p-5 rounded-2xl border-l-2 border-accent-orange bg-transparent space-y-2">
+                          <div className="text-xs font-mono text-accent-orange font-semibold uppercase tracking-wider">
+                            Highlight: {item.projectHighlight.title}
+                          </div>
+                          <p className="text-xs sm:text-sm text-text-secondary leading-relaxed font-light">
+                            {item.projectHighlight.description}
+                          </p>
+                          <ul className="space-y-1 text-xs text-text-muted font-light pt-1">
+                            {item.projectHighlight.points.map((pt, ptidx) => (
+                              <li key={ptidx} className="flex items-start gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-accent-purple shrink-0 mt-1" />
+                                <span>{pt}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* Stack Tags */}
+                      <div className="flex flex-wrap items-center gap-1.5 pt-2">
+                        <span className="text-[11px] font-mono text-text-muted uppercase tracking-wider mr-2">
+                          Technologies:
+                        </span>
+                        {item.technologies.map((tech, tidx) => (
+                          <span
+                            key={tidx}
+                            className="px-2.5 py-0.5 rounded text-xs font-mono text-text-muted border border-border/40 hover:border-accent-purple/50 transition-colors"
+                          >
+                            {tech}
+                          </span>
                         ))}
-                      </ul>
+                      </div>
                     </div>
-                  )}
-
-                  {/* Technologies */}
-                  <div className="flex flex-wrap items-center gap-2 pt-2">
-                    <span className="text-[11px] font-mono text-text-muted uppercase tracking-wider mr-2">
-                      Stack:
-                    </span>
-                    {item.technologies.map((tech, tidx) => (
-                      <span
-                        key={tidx}
-                        className="px-2.5 py-0.5 rounded text-xs font-mono text-text-secondary border border-border/40"
-                      >
-                        {tech}
-                      </span>
-                    ))}
                   </div>
-                </div>
+                );
+              })}
+            </div>
+
+            {/* Timeline Origin Base Node */}
+            <div className="relative grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-center pt-8">
+              <div className="hidden md:block md:col-span-3 text-right">
+                <span className="text-xs font-mono text-text-muted">Career Inception</span>
               </div>
-            ))}
+              <div className="absolute left-[11px] md:left-[215px] top-1/2 -translate-y-1/2">
+                <span className="w-3 h-3 rounded-full bg-border/60 block" />
+              </div>
+              <div className="pl-12 md:pl-0 md:col-span-9 text-xs font-mono text-text-muted">
+                20+ Years of Engineering, Architecture & Executive Technology Leadership
+              </div>
+            </div>
           </div>
         </div>
       </section>
