@@ -26,7 +26,7 @@ export const Navbar: React.FC = () => {
     { label: 'Expertise', path: '/expertise' },
     { label: 'Experience', path: '/experience' },
     { label: 'Book', path: '/book', badge: '2026' },
-    { label: 'Blog', path: '/blog' },
+    { label: 'Blog', path: '/blog', badge: 'Soon' },
   ];
 
   return (

@@ -412,23 +412,23 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 6. THOUGHT LEADERSHIP (EDITORIAL ARTICLE ROWS, NO CHUNKY BOXES) */}
+      {/* 6. THOUGHT LEADERSHIP (FORTHCOMING RESEARCH, NO CHUNKY BOXES) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <div className="border-t border-border/40 pt-16">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4 pb-6 border-b border-border/30">
             <div>
-              <span className="text-xs font-mono uppercase tracking-widest text-accent-purple font-semibold">
-                Perspectives & Engineering Notes
+              <span className="text-xs font-mono uppercase tracking-widest text-accent-orange font-semibold">
+                Perspectives & Field Notes · Coming Soon
               </span>
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-text-primary mt-1">
-                Thought Leadership & Research
+                Forthcoming Research & Insights
               </h2>
             </div>
             <Link
               to="/blog"
               className="inline-flex items-center gap-1.5 text-xs font-heading font-semibold text-accent-purple hover:underline"
             >
-              <span>Explore Complete Blog Archive</span>
+              <span>Explore Coming Soon Page</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -437,17 +437,17 @@ export const HomePage: React.FC = () => {
             {featuredArticles.map((article) => (
               <Link
                 key={article.slug}
-                to={`/blog/${article.slug}`}
+                to="/blog"
                 className="group flex flex-col justify-between space-y-4 pt-4 border-t border-border/30 hover:border-accent-purple/50 transition-colors"
               >
                 <div className="space-y-3">
                   {/* Visual Thumbnail */}
                   <VisualThumbnail type={article.visualType} className="h-44" />
 
-                  {/* Category & Read Time */}
+                  {/* Category & Status */}
                   <div className="flex items-center justify-between text-xs font-mono text-text-muted pt-1">
                     <span className="text-accent-purple font-medium">{article.category}</span>
-                    <span>{article.readingTime}</span>
+                    <span className="text-accent-orange text-[11px]">Coming Soon</span>
                   </div>
 
                   {/* Article Title */}
@@ -462,9 +462,9 @@ export const HomePage: React.FC = () => {
                 </div>
 
                 <div className="pt-2 flex items-center justify-between text-xs font-mono text-text-muted">
-                  <span>{article.publishedAt}</span>
+                  <span>Scheduled 2026</span>
                   <span className="flex items-center gap-1 text-accent-purple group-hover:translate-x-1 transition-transform">
-                    Read Note
+                    Preview Topic
                     <ArrowRight className="w-3 h-3" />
                   </span>
                 </div>

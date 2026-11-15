@@ -89,18 +89,11 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="text-text-secondary hover:text-text-primary transition-colors">
-                  Complete Blog Archive
-                </Link>
-              </li>
-              <li>
-                <Link to="/blog/building-production-ready-agentic-systems" className="text-text-secondary hover:text-text-primary transition-colors text-xs line-clamp-1">
-                  Production-Ready Agentic Systems
-                </Link>
-              </li>
-              <li>
-                <Link to="/blog/rag-at-enterprise-scale-patterns-and-pitfalls" className="text-text-secondary hover:text-text-primary transition-colors text-xs line-clamp-1">
-                  RAG at Enterprise Scale
+                <Link to="/blog" className="text-text-secondary hover:text-text-primary transition-colors flex items-center gap-1.5">
+                  <span>Research & Blog</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-accent-orange/15 text-accent-orange border border-accent-orange/30">
+                    Coming Soon
+                  </span>
                 </Link>
               </li>
             </ul>
