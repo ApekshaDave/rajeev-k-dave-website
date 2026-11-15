@@ -6,7 +6,9 @@ import {
   ArrowUpRight, 
   Send, 
   CheckCircle2, 
-  ShieldCheck 
+  ShieldCheck,
+  Loader2,
+  AlertCircle
 } from 'lucide-react';
 
 export const ContactPage: React.FC = () => {
@@ -16,11 +18,54 @@ export const ContactPage: React.FC = () => {
     inquiryType: 'Executive Advisory / AI Strategy',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/rajeevkdave@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          _replyto: formData.email,
+          inquiryType: formData.inquiryType,
+          message: formData.message,
+          _subject: `New Inquiry from ${formData.name} via RajeevDave.com [${formData.inquiryType}]`,
+          _template: 'table',
+          _captcha: 'false'
+        })
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          inquiryType: 'Executive Advisory / AI Strategy',
+          message: ''
+        });
+      } else {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.message || 'Submission service returned an unexpected response.');
+      }
+    } catch (err: any) {
+      console.error('Contact form delivery error:', err);
+      setErrorMessage(
+        'Unable to send automatically via web service. You can send this message directly via your email client to rajeevkdave@gmail.com.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -103,12 +148,12 @@ export const ContactPage: React.FC = () => {
                 <div>
                   <span className="text-xs font-mono text-text-muted block">LinkedIn</span>
                   <a
-                    href="https://linkedin.com/in/rajeevkdave"
+                    href="https://www.linkedin.com/in/raajeevhdave/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-text-primary hover:text-accent-orange transition-colors font-medium flex items-center gap-1"
                   >
-                    <span>linkedin.com/in/rajeevkdave</span>
+                    <span>linkedin.com/in/raajeevhdave</span>
                   </a>
                 </div>
               </div>
@@ -138,20 +183,43 @@ export const ContactPage: React.FC = () => {
               <div className="py-12 space-y-4">
                 <CheckCircle2 className="w-8 h-8 text-green-400" />
                 <h4 className="text-xl font-heading font-semibold text-text-primary">
-                  Message Received
+                  Message Sent Successfully
                 </h4>
-                <p className="text-sm text-text-secondary max-w-md font-light">
-                  Thank you for reaching out. Rajeev will review your inquiry and follow up shortly.
+                <p className="text-sm text-text-secondary max-w-md font-light leading-relaxed">
+                  Thank you for reaching out. Your message has been sent directly to <span className="text-accent-purple font-mono text-xs">rajeevkdave@gmail.com</span>. Rajeev will review your inquiry and follow up shortly.
                 </p>
                 <button
+                  type="button"
                   onClick={() => setSubmitted(false)}
-                  className="px-5 py-2 rounded-full border border-border/60 text-xs font-heading text-text-secondary hover:text-text-primary mt-2"
+                  className="px-5 py-2 rounded-full border border-border/60 text-xs font-heading text-text-secondary hover:text-text-primary mt-2 transition-colors"
                 >
                   Send another message
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
+                {errorMessage && (
+                  <div className="p-4 rounded-xl border border-accent-orange/40 bg-accent-orange/10 text-xs text-text-primary space-y-3">
+                    <div className="flex items-center gap-2 font-medium text-accent-orange">
+                      <AlertCircle className="w-4 h-4 shrink-0" />
+                      <span>{errorMessage}</span>
+                    </div>
+                    <div>
+                      <a
+                        href={`mailto:rajeevkdave@gmail.com?subject=${encodeURIComponent(
+                          `[${formData.inquiryType}] Inquiry from ${formData.name || 'Website Visitor'}`
+                        )}&body=${encodeURIComponent(
+                          `Name: ${formData.name}\nEmail: ${formData.email}\nInquiry Type: ${formData.inquiryType}\n\nMessage:\n${formData.message}`
+                        )}`}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent-orange text-bg-primary font-heading font-semibold text-xs hover:bg-accent-orange-hover transition-colors shadow-sm"
+                      >
+                        <Mail className="w-3.5 h-3.5" />
+                        <span>Send directly via Email App</span>
+                      </a>
+                    </div>
+                  </div>
+                )}
+
                 {/* Name */}
                 <div className="space-y-1.5">
                   <label className="text-xs font-heading font-medium text-text-secondary">
@@ -219,10 +287,20 @@ export const ContactPage: React.FC = () => {
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="py-3.5 px-8 rounded-full bg-accent-orange hover:bg-accent-orange-hover text-bg-primary font-heading font-semibold text-sm transition-all duration-200 shadow-glow-orange flex items-center justify-center gap-2 group"
+                    disabled={isSubmitting}
+                    className="py-3.5 px-8 rounded-full bg-accent-orange hover:bg-accent-orange-hover text-bg-primary font-heading font-semibold text-sm transition-all duration-200 shadow-glow-orange flex items-center justify-center gap-2 group disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    <span>Submit Message</span>
-                    <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Sending Message...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Submit Message</span>
+                        <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
                   </button>
                 </div>
               </form>

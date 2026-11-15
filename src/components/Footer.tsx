@@ -104,7 +104,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href="https://linkedin.com/in/rajeevkdave"
+                  href="https://www.linkedin.com/in/raajeevhdave/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-text-secondary hover:text-accent-purple transition-colors flex items-center gap-1 group"
@@ -123,13 +123,15 @@ export const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <Link
-                  to="/book"
+                <a
+                  href="https://www.amazon.in/Agents-That-Survive-REAL-WORLD-PRODUCTION-READY/dp/B0HGMRJF96"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-text-secondary hover:text-accent-orange transition-colors flex items-center gap-1 group"
                 >
-                  <span>Amazon Author Page</span>
+                  <span>Amazon Book Page</span>
                   <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
