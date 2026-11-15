@@ -70,35 +70,60 @@ export const HomePage: React.FC = () => {
             </div>
           </div>
 
-          {/* Hero Right Column (Portrait with glowing accents) */}
-          <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-md">
-              {/* Subtle Ambient Glow Behind Photo */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-accent-purple/25 via-transparent to-accent-orange/15 rounded-3xl blur-2xl transform scale-95" />
+          {/* Hero Right Column (Pop-Out 3D Portrait Effect) */}
+          <div className="lg:col-span-5 relative flex justify-center lg:justify-end items-end pt-8">
+            <div className="relative w-full max-w-[420px] sm:max-w-[460px] group">
+              {/* 1. Atmospheric Ambient Lighting / Halo behind the subject */}
+              <div 
+                className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full blur-[80px] opacity-45 pointer-events-none transition-opacity duration-700 group-hover:opacity-70"
+                style={{
+                  background: 'radial-gradient(circle, rgba(168, 121, 255, 0.45) 0%, rgba(255, 155, 56, 0.25) 50%, transparent 75%)'
+                }}
+              />
 
-              {/* Portrait Frame */}
-              <div className="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl">
-                <img
-                  src="/assets/images/rajeev-hero-portrait.jpg"
-                  alt="Rajeev Kumar Dave - Head of AI & Data"
-                  className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-[1.02]"
-                />
-                {/* Bottom Vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent opacity-50" />
+              {/* 2. Sleek Editorial Arch / Portal Pedestal Backdrop (Frame that the portrait pops out of) */}
+              <div className="relative mx-auto w-full max-w-[360px] sm:max-w-[400px]">
+                {/* Background Arch Frame */}
+                <div className="absolute inset-x-4 bottom-0 top-16 rounded-t-[140px] rounded-b-3xl bg-gradient-to-b from-[#181A26]/80 via-[#10121A]/90 to-transparent border-t border-x border-accent-purple/30 shadow-[0_20px_50px_rgba(0,0,0,0.8)]" />
 
-                {/* Minimal Overlay info */}
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs">
-                  <div>
-                    <div className="font-heading font-semibold text-text-primary">
-                      Rajeev Kumar Dave
-                    </div>
-                    <div className="text-[11px] text-text-secondary">
-                      Senior Leader – Data & AI
+                {/* Fine concentric decorative radar/grid arch lines */}
+                <div className="absolute inset-x-8 top-20 h-48 rounded-t-[120px] border-t border-accent-purple/20 pointer-events-none opacity-60" />
+                <div className="absolute inset-x-14 top-28 h-40 rounded-t-[100px] border-t border-accent-orange/20 pointer-events-none opacity-50" />
+
+                {/* 3. Pop-Out Subject: Head breaks out above the arch! */}
+                <div className="relative z-10 transition-transform duration-700 ease-out group-hover:scale-[1.03] group-hover:-translate-y-2">
+                  <img
+                    src="/assets/images/rajeev-hero-transparent.png"
+                    alt="Rajeev Kumar Dave - Head of AI & Data"
+                    className="w-full h-auto object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)] contrast-[1.03]"
+                  />
+
+                  {/* Soft bottom vignette blending into the floor wave */}
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-bg-primary via-bg-primary/70 to-transparent pointer-events-none" />
+                </div>
+
+                {/* 4. Floating Executive Badge (Pop-out Depth Element) */}
+                <div className="absolute -bottom-2 -left-2 sm:-left-4 z-20 transition-transform duration-500 group-hover:translate-x-1">
+                  <div className="px-4 py-2 rounded-full bg-bg-primary/90 backdrop-blur-md border border-border/80 shadow-2xl flex items-center gap-2.5">
+                    <span className="w-2 h-2 rounded-full bg-accent-orange animate-pulse" />
+                    <div className="text-left">
+                      <div className="text-xs font-heading font-semibold text-text-primary">
+                        Rajeev Kumar Dave
+                      </div>
+                      <div className="text-[10px] font-mono text-text-muted">
+                        Senior Leader · Data & AI
+                      </div>
                     </div>
                   </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-bg-primary/80 text-accent-purple border border-border">
-                    20+ Yrs Exp
-                  </span>
+                </div>
+
+                {/* Floating Experience Pill (Top-Right Depth Element) */}
+                <div className="absolute top-12 -right-2 sm:-right-4 z-20 transition-transform duration-500 group-hover:-translate-y-1">
+                  <div className="px-3 py-1.5 rounded-full bg-bg-primary/90 backdrop-blur-md border border-accent-purple/40 shadow-xl flex items-center gap-1.5">
+                    <span className="text-[10px] font-mono font-semibold text-accent-purple">
+                      20+ Yrs Enterprise
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
