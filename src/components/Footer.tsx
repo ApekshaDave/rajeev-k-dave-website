@@ -89,11 +89,6 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/writing" className="text-text-secondary hover:text-text-primary transition-colors">
-                  Curated Writing
-                </Link>
-              </li>
-              <li>
                 <Link to="/blog" className="text-text-secondary hover:text-text-primary transition-colors">
                   Complete Blog Archive
                 </Link>
@@ -165,3 +160,4 @@ export const Footer: React.FC = () => {
     </footer>
   );
 };
+

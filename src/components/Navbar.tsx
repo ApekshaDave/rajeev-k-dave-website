@@ -26,7 +26,6 @@ export const Navbar: React.FC = () => {
     { label: 'Expertise', path: '/expertise' },
     { label: 'Experience', path: '/experience' },
     { label: 'Book', path: '/book', badge: '2026' },
-    { label: 'Writing', path: '/writing' },
     { label: 'Blog', path: '/blog' },
   ];
 
@@ -182,3 +181,4 @@ export const Navbar: React.FC = () => {
     </header>
   );
 };
+

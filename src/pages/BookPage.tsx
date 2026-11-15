@@ -10,7 +10,9 @@ import {
   Compass, 
   CheckCircle2, 
   ShieldCheck,
-  ArrowRight
+  Camera,
+  Palette,
+  CheckCheck
 } from 'lucide-react';
 import { bookData } from '../data/book';
 
@@ -48,6 +50,26 @@ export const BookPage: React.FC = () => {
                 {bookData.fullOverview}
               </p>
 
+              {/* Book Credits from Cover */}
+              <div className="p-4 rounded-2xl bg-bg-primary/80 border border-border/80 space-y-2">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-text-muted block">
+                  Book Production Credits:
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                  {bookData.credits.map((credit, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      {credit.role === 'Photographer' && <Camera className="w-3.5 h-3.5 text-accent-orange" />}
+                      {credit.role === 'Designer' && <Palette className="w-3.5 h-3.5 text-accent-orange" />}
+                      {credit.role === 'Technical Reviewer' && <CheckCheck className="w-3.5 h-3.5 text-accent-orange" />}
+                      <div>
+                        <div className="text-[10px] font-mono text-text-muted uppercase">{credit.role}</div>
+                        <div className="font-heading font-semibold text-text-primary">{credit.name}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {/* Purchase Callout */}
               <div className="flex flex-wrap items-center gap-4 pt-4">
                 <a
@@ -73,12 +95,12 @@ export const BookPage: React.FC = () => {
                 {/* Radial warm glow */}
                 <div className="absolute inset-0 bg-accent-orange/30 blur-3xl rounded-full scale-110 group-hover:scale-125 transition-transform duration-700" />
 
-                {/* 3D Cover Display */}
-                <div className="relative p-4 rounded-2xl bg-bg-card/50 border border-accent-orange/40 shadow-2xl backdrop-blur-md">
+                {/* Cover Display */}
+                <div className="relative p-3 rounded-2xl bg-bg-card/60 border border-accent-orange/40 shadow-2xl backdrop-blur-md">
                   <img
                     src={bookData.coverImageHd}
                     alt="Agents That Survive - Book Cover by Rajeev K. Dave"
-                    className="w-64 sm:w-80 h-auto rounded-xl shadow-[0_25px_60px_rgba(0,0,0,0.85)] transform -rotate-1 group-hover:rotate-0 transition-transform duration-500"
+                    className="w-72 sm:w-84 max-w-full h-auto rounded-xl shadow-[0_25px_60px_rgba(0,0,0,0.85)] transform transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                   {/* Floor Glow Reflection */}
                   <div className="w-full h-5 bg-gradient-to-b from-accent-orange/30 to-transparent blur-sm rounded-full mt-3" />

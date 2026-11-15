@@ -222,3 +222,4 @@ export const ExpertisePage: React.FC = () => {
     </div>
   );
 };
+

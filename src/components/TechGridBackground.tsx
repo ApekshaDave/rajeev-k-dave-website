@@ -43,3 +43,4 @@ export const TechGridBackground: React.FC<{ children?: React.ReactNode; classNam
     </div>
   );
 };
+

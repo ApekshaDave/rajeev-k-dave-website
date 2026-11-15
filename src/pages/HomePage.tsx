@@ -61,10 +61,10 @@ export const HomePage: React.FC = () => {
               </Link>
 
               <Link
-                to="/writing"
+                to="/blog"
                 className="px-6 py-3.5 rounded-xl bg-bg-card hover:bg-bg-elevated border border-border hover:border-accent-purple/50 text-text-primary font-heading font-medium text-sm transition-all duration-200 flex items-center gap-2 group"
               >
-                <span>Read My Writing</span>
+                <span>Explore Blog & Research</span>
                 <ArrowUpRight className="w-4 h-4 text-text-muted group-hover:text-accent-purple group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
             </div>
@@ -459,3 +459,4 @@ export const HomePage: React.FC = () => {
     </div>
   );
 };
+

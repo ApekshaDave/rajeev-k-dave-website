@@ -264,3 +264,4 @@ export const BlogArticlePage: React.FC = () => {
     </div>
   );
 };
+

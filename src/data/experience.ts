@@ -170,3 +170,4 @@ export const experienceData: ExperienceItem[] = [
     technologies: ["Executive Leadership", "Enterprise Architecture", "Product Strategy", "Consulting"]
   }
 ];
+

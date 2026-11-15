@@ -175,3 +175,4 @@ export const VisualThumbnail: React.FC<VisualThumbnailProps> = ({ type, classNam
     </div>
   );
 };
+

@@ -75,3 +75,4 @@ export const WaveVisual: React.FC<{ className?: string }> = ({ className = "" })
     </div>
   );
 };
+
