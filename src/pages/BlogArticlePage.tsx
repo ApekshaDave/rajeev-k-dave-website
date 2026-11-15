@@ -8,9 +8,7 @@ import {
   Share2, 
   Check, 
   Copy, 
-  BookOpen, 
   ChevronRight,
-  ExternalLink,
   Sparkles
 } from 'lucide-react';
 import { articles } from '../data/articles';
@@ -56,7 +54,7 @@ export const BlogArticlePage: React.FC = () => {
         {/* Metadata Bar */}
         <div className="space-y-4">
           <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
-            <span className="px-2.5 py-1 rounded bg-accent-purple/15 text-accent-purple border border-accent-purple/30 font-medium">
+            <span className="text-accent-purple font-semibold">
               {article.category}
             </span>
             <span className="text-text-muted">·</span>
@@ -77,12 +75,12 @@ export const BlogArticlePage: React.FC = () => {
           </h1>
 
           {/* Author Block */}
-          <div className="flex items-center justify-between gap-4 pt-4 pb-6 border-b border-border/80">
+          <div className="flex items-center justify-between gap-4 pt-4 pb-6 border-b border-border/40">
             <div className="flex items-center gap-3">
               <img
                 src="/assets/images/rajeev-hero-portrait.jpg"
                 alt="Rajeev Kumar Dave"
-                className="w-11 h-11 rounded-full object-cover object-top border border-border"
+                className="w-10 h-10 rounded-full object-cover object-top border border-border"
               />
               <div>
                 <div className="text-sm font-heading font-semibold text-text-primary">
@@ -98,7 +96,7 @@ export const BlogArticlePage: React.FC = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={handleCopyLink}
-                className="px-3 py-1.5 rounded-lg bg-bg-card border border-border hover:border-accent-purple/40 text-xs font-heading font-medium text-text-secondary hover:text-text-primary flex items-center gap-1.5 transition-colors"
+                className="px-3.5 py-1.5 rounded-full border border-border/60 hover:border-accent-purple/40 text-xs font-heading font-medium text-text-secondary hover:text-text-primary flex items-center gap-1.5 transition-colors"
                 title="Copy article link"
               >
                 {copied ? (
@@ -118,74 +116,71 @@ export const BlogArticlePage: React.FC = () => {
                 href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-1.5 rounded-lg bg-bg-card border border-border hover:border-accent-purple/40 text-text-muted hover:text-accent-purple transition-colors"
+                className="p-2 rounded-full border border-border/60 hover:border-accent-purple/40 text-text-muted hover:text-accent-purple transition-colors"
                 title="Share on LinkedIn"
               >
-                <Share2 className="w-4 h-4" />
+                <Share2 className="w-3.5 h-3.5" />
               </a>
             </div>
           </div>
         </div>
 
         {/* Featured Visual Header Graphic */}
-        <div className="relative rounded-2xl overflow-hidden border border-border shadow-2xl">
+        <div className="relative rounded-2xl overflow-hidden shadow-2xl">
           <VisualThumbnail type={article.visualType} className="h-64 sm:h-80" />
         </div>
 
         {/* Table of Contents & Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start pt-6">
-          {/* Sticky Table of Contents (Desktop) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-6">
+          {/* Sticky Table of Contents (Desktop, Unboxed) */}
           {article.tableOfContents && article.tableOfContents.length > 0 && (
-            <aside className="lg:col-span-4 bg-bg-card p-5 rounded-2xl border border-border sticky top-24 space-y-3">
-              <div className="text-xs font-heading font-semibold uppercase tracking-wider text-accent-purple flex items-center gap-2">
+            <aside className="lg:col-span-4 sticky top-24 space-y-4 pt-2">
+              <div className="text-xs font-mono uppercase tracking-wider text-accent-purple flex items-center gap-2">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Table of Contents</span>
               </div>
-              <nav className="space-y-1.5 text-xs">
+              <nav className="space-y-1 text-xs">
                 {article.tableOfContents.map((toc) => (
                   <a
                     key={toc.id}
                     href={`#${toc.id}`}
-                    className="block text-text-secondary hover:text-accent-orange py-1 transition-colors border-l-2 border-transparent hover:border-accent-orange pl-2"
+                    className="block text-text-secondary hover:text-accent-orange py-1 transition-colors border-l border-border/30 hover:border-accent-orange pl-3"
                   >
                     {toc.title}
                   </a>
                 ))}
               </nav>
 
-              {/* Author Book Callout in Sidebar */}
-              <div className="pt-4 mt-4 border-t border-border/60">
-                <div className="p-3 rounded-xl bg-bg-primary/80 border border-border text-xs space-y-2">
-                  <span className="text-[10px] font-mono uppercase text-accent-orange font-semibold block">
-                    From the Author:
-                  </span>
-                  <p className="text-text-secondary text-[11px] leading-tight">
-                    Read the complete engineering guide in <em>Agents That Survive (2026)</em>.
-                  </p>
-                  <Link
-                    to="/book"
-                    className="inline-flex items-center gap-1 text-[11px] font-heading font-medium text-accent-orange hover:underline"
-                  >
-                    <span>Explore the Book</span>
-                    <ChevronRight className="w-3 h-3" />
-                  </Link>
-                </div>
+              {/* Author Book Mention */}
+              <div className="pt-6 border-t border-border/30 space-y-2">
+                <span className="text-[10px] font-mono uppercase text-accent-orange font-semibold block">
+                  Author's Book:
+                </span>
+                <p className="text-text-secondary text-xs leading-relaxed font-light">
+                  Read the complete field guide in <em>Agents That Survive (2026)</em>.
+                </p>
+                <Link
+                  to="/book"
+                  className="inline-flex items-center gap-1 text-xs font-heading font-medium text-accent-orange hover:underline pt-1"
+                >
+                  <span>Explore Book</span>
+                  <ChevronRight className="w-3 h-3" />
+                </Link>
               </div>
             </aside>
           )}
 
           {/* Main Article Prose Content */}
           <div className={`${article.tableOfContents?.length ? 'lg:col-span-8' : 'lg:col-span-12'} space-y-6 prose prose-invert max-w-none`}>
-            {/* Render HTML content safely */}
             <div dangerouslySetInnerHTML={{ __html: article.content }} />
 
             {/* Article Tags */}
-            <div className="pt-8 mt-12 border-t border-border flex flex-wrap items-center gap-2">
+            <div className="pt-8 mt-12 border-t border-border/30 flex flex-wrap items-center gap-2">
               <span className="text-xs font-mono text-text-muted mr-2">Tags:</span>
               {article.tags.map((tag, idx) => (
                 <span
                   key={idx}
-                  className="px-2.5 py-1 rounded-md bg-bg-card text-xs font-mono text-text-secondary border border-border"
+                  className="px-2.5 py-1 rounded text-xs font-mono text-text-muted border border-border/40"
                 >
                   #{tag}
                 </span>
@@ -195,11 +190,11 @@ export const BlogArticlePage: React.FC = () => {
         </div>
 
         {/* Previous & Next Article Navigation */}
-        <div className="pt-10 border-t border-border grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="pt-10 border-t border-border/30 grid grid-cols-1 sm:grid-cols-2 gap-6">
           {prevArticle ? (
             <Link
               to={`/blog/${prevArticle.slug}`}
-              className="p-5 rounded-2xl bg-bg-card border border-border hover:border-accent-purple/40 transition-colors flex items-center gap-3 group text-left"
+              className="flex items-center gap-3 group text-left pt-2"
             >
               <ArrowLeft className="w-4 h-4 text-accent-purple shrink-0 group-hover:-translate-x-1 transition-transform" />
               <div>
@@ -214,7 +209,7 @@ export const BlogArticlePage: React.FC = () => {
           {nextArticle && (
             <Link
               to={`/blog/${nextArticle.slug}`}
-              className="p-5 rounded-2xl bg-bg-card border border-border hover:border-accent-purple/40 transition-colors flex items-center justify-between gap-3 group text-right sm:col-start-2"
+              className="flex items-center justify-between gap-3 group text-right sm:col-start-2 pt-2"
             >
               <div>
                 <span className="text-[10px] font-mono text-text-muted uppercase">Next Article</span>
@@ -227,20 +222,20 @@ export const BlogArticlePage: React.FC = () => {
           )}
         </div>
 
-        {/* Related Articles Section */}
+        {/* Related Articles Section (Editorial, No Boxes) */}
         {relatedArticles.length > 0 && (
-          <div className="pt-12 border-t border-border space-y-6">
+          <div className="pt-12 border-t border-border/30 space-y-6 pb-12">
             <h3 className="text-xl font-heading font-bold text-text-primary">
               Related Articles & Field Notes
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {relatedArticles.map((rel) => (
                 <Link
                   key={rel.slug}
                   to={`/blog/${rel.slug}`}
-                  className="p-5 rounded-2xl bg-bg-card border border-border hover:border-accent-purple/50 transition-all flex flex-col justify-between group"
+                  className="group flex flex-col justify-between space-y-2 pt-4 border-t border-border/20 hover:border-accent-purple/40 transition-colors"
                 >
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     <div className="text-xs font-mono text-accent-purple">
                       {rel.category} · {rel.readingTime}
                     </div>
@@ -251,7 +246,7 @@ export const BlogArticlePage: React.FC = () => {
                       {rel.excerpt}
                     </p>
                   </div>
-                  <div className="pt-4 mt-4 border-t border-border/40 text-xs font-heading font-medium text-accent-purple flex items-center gap-1">
+                  <div className="pt-2 text-xs font-heading font-medium text-accent-purple flex items-center gap-1">
                     <span>Read Article</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </div>
@@ -264,4 +259,3 @@ export const BlogArticlePage: React.FC = () => {
     </div>
   );
 };
-

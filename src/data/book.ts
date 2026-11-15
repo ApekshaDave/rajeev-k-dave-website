@@ -27,8 +27,8 @@ export const bookData: BookDetails = {
   year: "2026",
   shortDescription: "Five critical gaps. Real-world patterns. Production-ready systems built for 2026 and beyond.",
   fullOverview: "A practical field guide to building production-ready Agentic AI systems, covering critical gaps, real-world patterns, and engineering approaches for AI agents that need to work reliably beyond the prototype stage. Grounded in 20+ years of enterprise engineering leadership and real-world multi-agent deployments, this book bridges the vast chasm between fragile agent demos and resilient enterprise software.",
-  coverImage: "/assets/images/agents-that-survive-original-cover.jpg",
-  coverImageHd: "/assets/images/agents-that-survive-original-cover.jpg",
+  coverImage: "/assets/images/agents-that-survive-3d.png",
+  coverImageHd: "/assets/images/agents-that-survive-3d.png",
   amazonUrl: "https://www.amazon.com/dp/B0EXAMPLEDAVE", // Link to Amazon
   credits: [
     { role: "Photographer", name: "Sharad Nagar" },

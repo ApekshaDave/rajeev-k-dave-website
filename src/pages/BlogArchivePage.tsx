@@ -3,12 +3,7 @@ import { Link } from 'react-router-dom';
 import { 
   Search, 
   ArrowUpDown, 
-  ArrowRight, 
-  Calendar, 
-  Clock, 
-  Sparkles, 
-  Filter,
-  Check
+  ArrowRight
 } from 'lucide-react';
 import { articles, articleCategories, ArticleCategory } from '../data/articles';
 import { VisualThumbnail } from '../components/VisualThumbnail';
@@ -61,7 +56,7 @@ export const BlogArchivePage: React.FC = () => {
       {/* 1. BLOG HERO SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent-purple/15 border border-accent-purple/30 text-accent-purple text-xs font-heading font-medium tracking-wider uppercase">
+          <div className="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-accent-purple uppercase">
             <span>Knowledge Archive</span>
           </div>
 
@@ -75,14 +70,14 @@ export const BlogArchivePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. MAIN BLOG ARCHIVE CONTAINER (Sidebar + Grid Layout matching mockup) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      {/* 2. MAIN BLOG ARCHIVE CONTAINER (OPEN EDITORIAL LAYOUT, NO BOXES) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div className="border-t border-border/40 pt-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Left Sidebar: Categories with Counts */}
-          <div className="lg:col-span-3 space-y-4 bg-bg-card p-5 rounded-2xl border border-border sticky top-24">
-            <div className="flex items-center justify-between pb-3 border-b border-border/80 text-xs font-heading font-semibold text-text-primary uppercase tracking-wider">
+          <div className="lg:col-span-3 space-y-3 sticky top-24">
+            <div className="flex items-center justify-between pb-3 border-b border-border/40 text-xs font-mono text-text-muted uppercase tracking-wider">
               <span>Categories</span>
-              <span className="text-text-muted font-mono">{articles.length} Posts</span>
+              <span>{articles.length} Posts</span>
             </div>
 
             <div className="space-y-1">
@@ -95,12 +90,12 @@ export const BlogArchivePage: React.FC = () => {
                     key={category}
                     onClick={() => {
                       setSelectedCategory(category);
-                      setVisibleCount(6); // Reset pagination on category change
+                      setVisibleCount(6);
                     }}
-                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-heading font-medium transition-all ${
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-heading transition-all ${
                       isSelected
-                        ? 'bg-accent-purple/20 text-accent-purple border border-accent-purple/40 shadow-sm'
-                        : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated'
+                        ? 'text-accent-purple font-semibold border-l-2 border-accent-purple pl-2'
+                        : 'text-text-secondary hover:text-text-primary'
                     }`}
                   >
                     <span>{category}</span>
@@ -113,10 +108,10 @@ export const BlogArchivePage: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Main Area: Search, Sort, and Cards */}
-          <div className="lg:col-span-9 space-y-6">
-            {/* Search & Sort Controls Bar */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 rounded-2xl bg-bg-card border border-border">
+          {/* Right Main Area: Search, Sort, and Clean Editorial List */}
+          <div className="lg:col-span-9 space-y-8">
+            {/* Search & Sort Controls */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pb-6 border-b border-border/30">
               {/* Search Bar */}
               <div className="relative flex-1">
                 <Search className="w-4 h-4 text-text-muted absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -128,7 +123,7 @@ export const BlogArchivePage: React.FC = () => {
                     setSearchQuery(e.target.value);
                     setVisibleCount(6);
                   }}
-                  className="w-full pl-10 pr-4 py-2 rounded-xl bg-bg-primary border border-border text-xs sm:text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-purple/60 transition-colors"
+                  className="w-full pl-10 pr-4 py-2 rounded-full bg-transparent border border-border/60 text-xs sm:text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-purple/60 transition-colors"
                 />
               </div>
 
@@ -141,10 +136,10 @@ export const BlogArchivePage: React.FC = () => {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as 'latest' | 'oldest')}
-                  className="bg-bg-primary border border-border text-xs font-mono text-text-secondary rounded-xl px-3 py-2 focus:outline-none focus:border-accent-purple/60 cursor-pointer"
+                  className="bg-transparent border border-border/60 text-xs font-mono text-text-secondary rounded-full px-3 py-1.5 focus:outline-none focus:border-accent-purple/60 cursor-pointer"
                 >
-                  <option value="latest">Latest First</option>
-                  <option value="oldest">Oldest First</option>
+                  <option value="latest" className="bg-bg-primary">Latest First</option>
+                  <option value="oldest" className="bg-bg-primary">Oldest First</option>
                 </select>
               </div>
             </div>
@@ -154,12 +149,12 @@ export const BlogArchivePage: React.FC = () => {
               <div className="flex items-center gap-2 text-xs font-mono text-text-muted">
                 <span>Filtering:</span>
                 {selectedCategory !== 'All' && (
-                  <span className="px-2 py-0.5 rounded bg-accent-purple/15 text-accent-purple border border-accent-purple/30">
+                  <span className="px-2 py-0.5 rounded text-accent-purple border border-accent-purple/30">
                     Category: {selectedCategory}
                   </span>
                 )}
                 {searchQuery && (
-                  <span className="px-2 py-0.5 rounded bg-bg-elevated text-text-secondary border border-border">
+                  <span className="px-2 py-0.5 rounded text-text-secondary border border-border/40">
                     Query: "{searchQuery}"
                   </span>
                 )}
@@ -175,11 +170,11 @@ export const BlogArchivePage: React.FC = () => {
               </div>
             )}
 
-            {/* Articles List / Grid */}
+            {/* Articles List (Clean Editorial Rows, No Boxes) */}
             {displayedArticles.length === 0 ? (
-              <div className="p-12 text-center rounded-2xl bg-bg-card border border-border space-y-3">
+              <div className="py-16 text-center space-y-3">
                 <p className="text-text-primary font-heading font-medium">No articles found</p>
-                <p className="text-xs text-text-secondary max-w-sm mx-auto">
+                <p className="text-xs text-text-secondary max-w-sm mx-auto font-light">
                   No articles matched your filter criteria. Try adjusting your search query or select another category.
                 </p>
                 <button
@@ -187,18 +182,18 @@ export const BlogArchivePage: React.FC = () => {
                     setSelectedCategory('All');
                     setSearchQuery('');
                   }}
-                  className="px-4 py-2 rounded-xl bg-accent-purple text-xs font-heading font-semibold text-white mt-2"
+                  className="px-4 py-2 rounded-full bg-accent-purple text-xs font-heading font-semibold text-white mt-2"
                 >
                   Reset Filters
                 </button>
               </div>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-10">
                 {displayedArticles.map((article) => (
                   <Link
                     key={article.slug}
                     to={`/blog/${article.slug}`}
-                    className="p-5 sm:p-6 rounded-2xl bg-bg-card border border-border hover:border-accent-purple/50 transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-6 group"
+                    className="group flex flex-col md:flex-row md:items-center justify-between gap-6 pb-10 border-b border-border/30 last:border-none transition-colors"
                   >
                     {/* Left: Thumbnail Preview */}
                     <div className="w-full md:w-56 shrink-0">
@@ -229,7 +224,7 @@ export const BlogArchivePage: React.FC = () => {
                         {article.tags.slice(0, 3).map((tag, tidx) => (
                           <span
                             key={tidx}
-                            className="text-[10px] font-mono px-2 py-0.5 rounded bg-bg-elevated text-text-muted border border-border/60"
+                            className="text-[10px] font-mono text-text-muted"
                           >
                             #{tag}
                           </span>
@@ -239,8 +234,8 @@ export const BlogArchivePage: React.FC = () => {
 
                     {/* Right: Action Arrow */}
                     <div className="shrink-0 flex items-center justify-end md:justify-center">
-                      <div className="w-10 h-10 rounded-xl bg-bg-elevated border border-border flex items-center justify-center text-text-muted group-hover:text-accent-purple group-hover:border-accent-purple/40 group-hover:translate-x-1 transition-all">
-                        <ArrowRight className="w-4 h-4" />
+                      <div className="text-text-muted group-hover:text-accent-purple group-hover:translate-x-1 transition-all">
+                        <ArrowRight className="w-5 h-5" />
                       </div>
                     </div>
                   </Link>
@@ -253,7 +248,7 @@ export const BlogArchivePage: React.FC = () => {
               <div className="pt-6 text-center">
                 <button
                   onClick={() => setVisibleCount((prev) => prev + 6)}
-                  className="px-8 py-3 rounded-xl bg-bg-card hover:bg-bg-elevated border border-border hover:border-accent-purple/40 text-text-primary font-heading font-medium text-xs sm:text-sm transition-all"
+                  className="px-8 py-3 rounded-full text-text-primary hover:text-white font-heading font-medium text-xs sm:text-sm border border-border/60 hover:border-accent-purple/50 transition-all"
                 >
                   Load More Articles ({filteredArticles.length - visibleCount} remaining)
                 </button>
@@ -265,4 +260,3 @@ export const BlogArchivePage: React.FC = () => {
     </div>
   );
 };
-

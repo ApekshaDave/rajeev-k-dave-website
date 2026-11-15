@@ -104,12 +104,12 @@ export const AboutPage: React.FC = () => {
 
   return (
     <div className="space-y-24 sm:space-y-32 pt-24 sm:pt-28 lg:pt-32">
-      {/* 1. EDITORIAL HERO & BIOGRAPHY HEADER */}
+      {/* 1. EDITORIAL HERO & BIOGRAPHY HEADER (NO BOXES) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Biography Text */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent-orange/15 border border-accent-orange/30 text-accent-orange text-xs font-heading font-medium tracking-wider uppercase">
+            <div className="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-accent-orange uppercase">
               <span>Executive Biography</span>
             </div>
 
@@ -137,23 +137,21 @@ export const AboutPage: React.FC = () => {
           {/* Primary Speaking Image */}
           <div className="lg:col-span-5 flex justify-center">
             <div className="relative w-full max-w-md">
-              <div className="absolute inset-0 bg-accent-purple/20 blur-2xl rounded-3xl" />
-              <div className="relative rounded-3xl overflow-hidden border border-border bg-bg-card p-2 shadow-2xl">
-                <div className="rounded-2xl overflow-hidden aspect-[4/5] bg-bg-primary">
-                  <img
-                    src="/assets/images/rajeev-event-mic.jpg"
-                    alt="Rajeev Kumar Dave speaking at NCR Voyix"
-                    className="w-full h-full object-cover object-center"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent opacity-60" />
-                  <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-bg-card/90 backdrop-blur-md border border-border text-xs">
-                    <span className="font-heading font-semibold text-text-primary block">
-                      Speaking on Enterprise GenAI & Ethics
-                    </span>
-                    <span className="text-[11px] text-text-muted">
-                      NCR Voyix Technology Forum
-                    </span>
-                  </div>
+              <div className="absolute inset-0 bg-accent-purple/20 blur-3xl rounded-3xl" />
+              <div className="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl">
+                <img
+                  src="/assets/images/rajeev-event-mic.jpg"
+                  alt="Rajeev Kumar Dave speaking at NCR Voyix"
+                  className="w-full h-full object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent opacity-60" />
+                <div className="absolute bottom-4 left-4 right-4 text-xs text-text-secondary">
+                  <span className="font-heading font-semibold text-text-primary block">
+                    Speaking on Enterprise GenAI & Ethics
+                  </span>
+                  <span className="text-[11px] text-text-muted">
+                    NCR Voyix Technology Forum
+                  </span>
                 </div>
               </div>
             </div>
@@ -161,117 +159,107 @@ export const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. LEADERSHIP PRINCIPLES */}
+      {/* 2. LEADERSHIP PRINCIPLES - EDITORIAL COLUMNS (NO BOXES) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <span className="text-xs font-heading uppercase tracking-wider text-accent-purple font-semibold">
-            Guiding Philosophy
-          </span>
-          <h2 className="text-3xl font-heading font-bold text-text-primary">
-            Technology Leadership Principles
-          </h2>
-          <p className="text-sm text-text-secondary">
-            The core tenets forged over two decades of leading mission-critical engineering initiatives.
-          </p>
-        </div>
+        <div className="border-t border-border/40 pt-16">
+          <div className="max-w-2xl mb-12 space-y-2">
+            <span className="text-xs font-mono uppercase tracking-widest text-accent-purple font-semibold">
+              Guiding Philosophy
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-heading font-bold text-text-primary">
+              Technology Leadership Principles
+            </h2>
+            <p className="text-sm text-text-secondary font-light">
+              The core tenets forged over two decades of leading mission-critical engineering initiatives.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {leadershipPrinciples.map((principle, idx) => {
-            const Icon = principle.icon;
-            return (
-              <div
-                key={idx}
-                className="p-6 rounded-2xl bg-bg-card border border-border hover:border-accent-purple/40 transition-all duration-300 flex flex-col justify-between group"
-              >
-                <div className="space-y-4">
-                  <div className="w-10 h-10 rounded-xl bg-bg-elevated border border-border flex items-center justify-center text-accent-purple group-hover:text-accent-orange transition-colors">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {leadershipPrinciples.map((principle, idx) => {
+              const Icon = principle.icon;
+              return (
+                <div key={idx} className="space-y-3 pt-4 border-t border-border/30">
+                  <div className="w-8 h-8 flex items-center justify-center text-accent-purple">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <h3 className="text-lg font-heading font-semibold text-text-primary group-hover:text-accent-purple transition-colors">
+                  <h3 className="text-lg font-heading font-semibold text-text-primary">
                     {principle.title}
                   </h3>
                   <p className="text-sm text-text-secondary leading-relaxed font-light">
                     {principle.description}
                   </p>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      {/* 3. EDITORIAL PHOTOGRAPHY & SPEAKING SECTION */}
+      {/* 3. EDITORIAL PHOTOGRAPHY & SPEAKING SECTION (NO BOXES) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="border-t border-border pt-16">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+        <div className="border-t border-border/40 pt-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4 pb-6 border-b border-border/30">
             <div>
-              <span className="text-xs font-heading uppercase tracking-wider text-accent-orange font-semibold">
+              <span className="text-xs font-mono uppercase tracking-widest text-accent-orange font-semibold">
                 Engagement & Culture
               </span>
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-text-primary mt-1">
                 Engineering Culture, Community & Keynotes
               </h2>
             </div>
-            <p className="text-sm text-text-secondary max-w-md">
+            <p className="text-sm text-text-secondary max-w-md font-light">
               Fostering inclusive, high-velocity engineering organizations, mentoring technologists, and speaking at industry forums.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             {/* Photo 1: B&W Event Photo */}
-            <div className="p-3 rounded-2xl bg-bg-card border border-border overflow-hidden group">
-              <div className="rounded-xl overflow-hidden aspect-[16/11] relative">
+            <div className="space-y-3">
+              <div className="rounded-2xl overflow-hidden aspect-[16/11] relative shadow-xl">
                 <img
                   src="/assets/images/rajeev-event-bw.jpg"
                   alt="Rajeev Kumar Dave addressing engineering teams"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent opacity-50" />
-                <div className="absolute bottom-3 left-3 right-3 p-2.5 rounded-lg bg-bg-primary/80 backdrop-blur-sm border border-border/60 text-xs text-text-secondary">
-                  <span className="font-heading font-semibold text-text-primary">Keynote & Town Hall:</span> Inspiring engineering teams and celebrating technical milestones.
-                </div>
+              </div>
+              <div className="text-xs text-text-secondary font-light">
+                <strong className="text-text-primary font-medium">Keynote & Town Hall:</strong> Inspiring engineering teams and celebrating technical milestones.
               </div>
             </div>
 
             {/* Photo 2: Candid Event Photo */}
-            <div className="p-3 rounded-2xl bg-bg-card border border-border overflow-hidden group">
-              <div className="rounded-xl overflow-hidden aspect-[16/11] relative">
+            <div className="space-y-3">
+              <div className="rounded-2xl overflow-hidden aspect-[16/11] relative shadow-xl">
                 <img
                   src="/assets/images/rajeev-event-candid.jpg"
                   alt="Rajeev Kumar Dave receiving industry recognition"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent opacity-50" />
-                <div className="absolute bottom-3 left-3 right-3 p-2.5 rounded-lg bg-bg-primary/80 backdrop-blur-sm border border-border/60 text-xs text-text-secondary">
-                  <span className="font-heading font-semibold text-text-primary">Recognition & Awards:</span> Leading with empathy, celebrating innovation, and recognizing team excellence.
-                </div>
+              </div>
+              <div className="text-xs text-text-secondary font-light">
+                <strong className="text-text-primary font-medium">Recognition & Awards:</strong> Leading with empathy, celebrating innovation, and recognizing team excellence.
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4. EDUCATION & CERTIFICATIONS */}
+      {/* 4. EDUCATION & CERTIFICATIONS (CLEAN EDITORIAL LISTS, NO BOXES) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 pt-8">
+        <div className="border-t border-border/40 pt-16 grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Education */}
           <div className="space-y-6">
-            <div className="flex items-center gap-3 pb-4 border-b border-border">
-              <div className="w-8 h-8 rounded-lg bg-accent-purple/10 border border-accent-purple/30 flex items-center justify-center text-accent-purple">
-                <GraduationCap className="w-4 h-4" />
-              </div>
+            <div className="flex items-center gap-2 pb-4 border-b border-border/30">
+              <GraduationCap className="w-4 h-4 text-accent-purple" />
               <h3 className="text-xl font-heading font-bold text-text-primary">
                 Education
               </h3>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-6">
               {educationList.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="p-4 rounded-xl bg-bg-card border border-border hover:border-accent-purple/30 transition-colors"
-                >
-                  <div className="flex items-center justify-between text-xs text-text-muted font-mono mb-1">
+                <div key={idx} className="space-y-1 pb-4 border-b border-border/20 last:border-none">
+                  <div className="flex items-center justify-between text-xs text-text-muted font-mono">
                     <span>{item.institution}</span>
                     <span className="text-accent-purple font-medium">{item.year}</span>
                   </div>
@@ -285,53 +273,48 @@ export const AboutPage: React.FC = () => {
 
           {/* Certifications & Industry Credentials */}
           <div className="space-y-6">
-            <div className="flex items-center gap-3 pb-4 border-b border-border">
-              <div className="w-8 h-8 rounded-lg bg-accent-orange/10 border border-accent-orange/30 flex items-center justify-center text-accent-orange">
-                <Award className="w-4 h-4" />
-              </div>
+            <div className="flex items-center gap-2 pb-4 border-b border-border/30">
+              <Award className="w-4 h-4 text-accent-orange" />
               <h3 className="text-xl font-heading font-bold text-text-primary">
                 Certifications & Credentials
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="space-y-4">
               {certificationsList.map((cert, idx) => (
-                <div
-                  key={idx}
-                  className="p-4 rounded-xl bg-bg-card border border-border hover:border-accent-orange/30 transition-colors flex flex-col justify-between gap-3"
-                >
-                  <div>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-bg-elevated text-accent-orange border border-border inline-block mb-2">
-                      {cert.badge}
-                    </span>
-                    <div className="text-xs font-heading font-semibold text-text-primary leading-snug">
+                <div key={idx} className="flex items-start justify-between gap-4 pb-3 border-b border-border/20 last:border-none">
+                  <div className="space-y-0.5">
+                    <div className="text-xs font-heading font-semibold text-text-primary">
                       {cert.title}
                     </div>
+                    <div className="text-[11px] text-text-muted font-mono">
+                      Issuer: {cert.issuer}
+                    </div>
                   </div>
-                  <div className="text-[11px] text-text-muted font-mono">
-                    Issuer: {cert.issuer}
-                  </div>
+                  <span className="text-[10px] font-mono text-accent-orange px-2 py-0.5 rounded border border-accent-orange/30 shrink-0">
+                    {cert.badge}
+                  </span>
                 </div>
               ))}
             </div>
 
             {/* Speaking Highlight */}
-            <div className="p-4 rounded-xl bg-gradient-to-r from-accent-purple/10 to-transparent border border-accent-purple/30 flex items-start gap-3">
-              <Mic2 className="w-5 h-5 text-accent-purple shrink-0 mt-0.5" />
-              <div className="text-xs text-text-secondary leading-relaxed">
-                <strong className="text-text-primary font-heading">Industry Speaker:</strong> Regularly delivers keynote sessions and technical talks on Generative AI, Responsible AI, and Machine Learning Ethics across enterprise forums.
+            <div className="pt-4 flex items-start gap-3 text-xs text-text-secondary leading-relaxed font-light">
+              <Mic2 className="w-4 h-4 text-accent-purple shrink-0 mt-0.5" />
+              <div>
+                <strong className="text-text-primary font-medium">Industry Speaker:</strong> Regularly delivers keynote sessions and technical talks on Generative AI, Responsible AI, and Machine Learning Ethics across enterprise forums.
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 5. AWARDS & RECOGNITION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-10 rounded-3xl bg-bg-card border border-border space-y-8">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-border/70">
+      {/* 5. AWARDS & RECOGNITION (NO BOXES) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div className="border-t border-border/40 pt-16 space-y-8">
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 pb-6 border-b border-border/30">
             <div>
-              <span className="text-xs font-heading uppercase tracking-wider text-accent-orange font-semibold">
+              <span className="text-xs font-mono uppercase tracking-widest text-accent-orange font-semibold">
                 Track Record of Excellence
               </span>
               <h3 className="text-2xl font-heading font-bold text-text-primary mt-1">
@@ -340,35 +323,27 @@ export const AboutPage: React.FC = () => {
             </div>
             <Link
               to="/experience"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-bg-elevated border border-border text-xs font-heading font-medium text-text-secondary hover:text-text-primary transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-heading font-semibold text-accent-purple hover:underline"
             >
               <span>Explore Career Timeline</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {awardsList.map((award, idx) => (
-              <div
-                key={idx}
-                className="p-5 rounded-2xl bg-bg-primary/60 border border-border/80 flex items-start gap-4"
-              >
-                <div className="w-10 h-10 rounded-xl bg-accent-orange/15 border border-accent-orange/30 flex items-center justify-center text-accent-orange shrink-0">
-                  <Award className="w-5 h-5" />
+              <div key={idx} className="space-y-2 pb-6 border-b border-border/20">
+                <div className="flex items-center justify-between gap-2">
+                  <h4 className="text-base font-heading font-semibold text-text-primary">
+                    {award.title}
+                  </h4>
+                  <span className="text-xs font-mono text-accent-orange">
+                    {award.years}
+                  </span>
                 </div>
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between gap-2">
-                    <h4 className="text-sm font-heading font-semibold text-text-primary">
-                      {award.title}
-                    </h4>
-                    <span className="text-xs font-mono text-accent-orange">
-                      {award.years}
-                    </span>
-                  </div>
-                  <p className="text-xs text-text-secondary leading-relaxed font-light">
-                    {award.description}
-                  </p>
-                </div>
+                <p className="text-xs sm:text-sm text-text-secondary leading-relaxed font-light">
+                  {award.description}
+                </p>
               </div>
             ))}
           </div>
@@ -377,4 +352,3 @@ export const AboutPage: React.FC = () => {
     </div>
   );
 };
-

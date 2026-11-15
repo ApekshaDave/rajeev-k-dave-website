@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
 import { 
-  Briefcase, 
-  MapPin, 
   Calendar, 
-  Sparkles, 
-  ChevronRight, 
+  MapPin, 
   CheckCircle2, 
-  Terminal, 
-  Zap,
-  TrendingUp,
-  Clock,
-  Search,
-  Filter
+  Sparkles, 
+  ArrowRight 
 } from 'lucide-react';
 import { experienceData, impactMetrics } from '../data/experience';
 
@@ -37,7 +30,7 @@ export const ExperiencePage: React.FC = () => {
       {/* 1. HEADER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent-orange/15 border border-accent-orange/30 text-accent-orange text-xs font-heading font-medium tracking-wider uppercase">
+          <div className="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-accent-orange uppercase">
             <span>Verified Career History</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-heading font-bold text-text-primary tracking-tight">
@@ -49,38 +42,33 @@ export const ExperiencePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. DEDICATED IMPACT SECTION */}
+      {/* 2. DEDICATED IMPACT SECTION (OPEN EDITORIAL, NO BOXES) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-12 rounded-3xl bg-bg-card border border-border space-y-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-border/70">
+        <div className="border-t border-border/40 pt-16 space-y-10">
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 pb-6 border-b border-border/30">
             <div>
-              <span className="text-xs font-heading uppercase tracking-wider text-accent-purple font-semibold">
+              <span className="text-xs font-mono uppercase tracking-widest text-accent-purple font-semibold">
                 Quantified Outcomes
               </span>
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-text-primary mt-1">
                 Executive Impact & Production Metrics
               </h2>
             </div>
-            <p className="text-xs sm:text-sm text-text-secondary max-w-sm">
+            <p className="text-xs sm:text-sm text-text-secondary font-light max-w-sm">
               Measurable improvements delivered through production AI, automation, and platform re-engineering.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {impactMetrics.map((metric, idx) => (
-              <div
-                key={idx}
-                className="p-6 rounded-2xl bg-bg-primary/70 border border-border/80 hover:border-accent-purple/40 transition-all duration-300 flex flex-col justify-between group"
-              >
-                <div className="space-y-2">
-                  <div className="text-3xl sm:text-4xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-r from-text-primary via-white to-accent-orange">
-                    {metric.value}
-                  </div>
-                  <h4 className="text-sm font-heading font-semibold text-text-primary group-hover:text-accent-purple transition-colors">
-                    {metric.label}
-                  </h4>
+              <div key={idx} className="space-y-3 pt-4 border-t border-border/30">
+                <div className="text-3xl sm:text-4xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-r from-text-primary via-white to-accent-orange">
+                  {metric.value}
                 </div>
-                <p className="text-xs text-text-secondary leading-relaxed mt-4 pt-3 border-t border-border/50 font-light">
+                <h4 className="text-base font-heading font-semibold text-text-primary">
+                  {metric.label}
+                </h4>
+                <p className="text-xs text-text-secondary leading-relaxed font-light">
                   {metric.sublabel}
                 </p>
               </div>
@@ -89,143 +77,144 @@ export const ExperiencePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. INTERACTIVE CAREER TIMELINE */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Timeline Header & Filters */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-12 pb-6 border-b border-border">
-          <div>
-            <h2 className="text-2xl font-heading font-bold text-text-primary">
-              Career Timeline
-            </h2>
-            <p className="text-xs sm:text-sm text-text-secondary mt-1">
-              Verified leadership roles, architectural milestones and team expansions.
-            </p>
+      {/* 3. INTERACTIVE CAREER TIMELINE (OPEN EDITORIAL, NO BOXES) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div className="border-t border-border/40 pt-16">
+          {/* Timeline Header & Filters */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-14 pb-6 border-b border-border/30">
+            <div>
+              <h2 className="text-2xl font-heading font-bold text-text-primary">
+                Career Timeline
+              </h2>
+              <p className="text-xs sm:text-sm text-text-secondary mt-1 font-light">
+                Verified leadership roles, architectural milestones and team expansions.
+              </p>
+            </div>
+
+            {/* Filter Buttons */}
+            <div className="flex flex-wrap items-center gap-2">
+              {(['All', 'AI & Data', 'DevOps & Architecture', 'Platform & Leadership'] as const).map((filter) => (
+                <button
+                  key={filter}
+                  onClick={() => setActiveRoleFilter(filter)}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-heading font-medium transition-all ${
+                    activeRoleFilter === filter
+                      ? 'bg-accent-purple text-bg-primary font-semibold shadow-glow-purple'
+                      : 'text-text-secondary hover:text-text-primary border border-border/50'
+                  }`}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
           </div>
 
-          {/* Filter Pills */}
-          <div className="flex flex-wrap items-center gap-2">
-            {(['All', 'AI & Data', 'DevOps & Architecture', 'Platform & Leadership'] as const).map((filter) => (
-              <button
-                key={filter}
-                onClick={() => setActiveRoleFilter(filter)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-heading font-medium transition-all ${
-                  activeRoleFilter === filter
-                    ? 'bg-accent-purple text-bg-primary font-semibold shadow-glow-purple'
-                    : 'bg-bg-card text-text-secondary hover:text-text-primary border border-border'
-                }`}
-              >
-                {filter}
-              </button>
-            ))}
-          </div>
-        </div>
+          {/* Timeline Items (Flowing, Open Layout) */}
+          <div className="relative pl-6 sm:pl-8 border-l border-border/40 space-y-16">
+            {filteredExperience.map((item) => (
+              <div key={item.id} className="relative group">
+                {/* Timeline Marker Dot */}
+                <div 
+                  className={`absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full border-2 transition-transform duration-300 group-hover:scale-125 ${
+                    item.isCurrent 
+                      ? 'bg-accent-orange border-accent-orange shadow-glow-orange' 
+                      : 'bg-bg-primary border-accent-purple group-hover:bg-accent-purple'
+                  }`}
+                />
 
-        {/* Timeline Items */}
-        <div className="relative pl-6 sm:pl-8 border-l border-border space-y-16">
-          {filteredExperience.map((item, idx) => (
-            <div key={item.id} className="relative group">
-              {/* Timeline Marker Dot */}
-              <div 
-                className={`absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full border-2 transition-transform duration-300 group-hover:scale-125 ${
-                  item.isCurrent 
-                    ? 'bg-accent-orange border-accent-orange shadow-glow-orange' 
-                    : 'bg-bg-primary border-accent-purple group-hover:bg-accent-purple'
-                }`}
-              />
-
-              {/* Experience Card */}
-              <div className="p-6 sm:p-8 rounded-3xl bg-bg-card border border-border hover:border-accent-purple/40 transition-all duration-300 space-y-6">
-                {/* Header row */}
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 pb-6 border-b border-border/60">
-                  <div className="space-y-1">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <h3 className="text-xl sm:text-2xl font-heading font-bold text-text-primary">
-                        {item.role}
-                      </h3>
-                      {item.isCurrent && (
-                        <span className="px-2.5 py-0.5 rounded-full bg-accent-orange/15 text-accent-orange border border-accent-orange/30 text-[11px] font-mono font-medium">
-                          Current Leadership
-                        </span>
-                      )}
+                {/* Experience Content (Unboxed) */}
+                <div className="space-y-6 pb-12 border-b border-border/20 last:border-none">
+                  {/* Header row */}
+                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                    <div className="space-y-1">
+                      <div className="flex flex-wrap items-center gap-3">
+                        <h3 className="text-xl sm:text-2xl font-heading font-bold text-text-primary">
+                          {item.role}
+                        </h3>
+                        {item.isCurrent && (
+                          <span className="px-2.5 py-0.5 rounded-full bg-accent-orange/15 text-accent-orange border border-accent-orange/30 text-[10px] font-mono font-medium">
+                            Current Role
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-base font-heading font-medium text-accent-purple">
+                        {item.company}
+                      </div>
                     </div>
-                    <div className="text-base font-heading font-medium text-accent-purple">
-                      {item.company}
+
+                    <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-text-muted">
+                      <span className="flex items-center gap-1.5 text-text-secondary">
+                        <Calendar className="w-3.5 h-3.5 text-accent-purple" />
+                        {item.period}
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <MapPin className="w-3.5 h-3.5 text-accent-orange" />
+                        {item.location}
+                      </span>
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap sm:flex-col sm:items-end gap-2 text-xs font-mono text-text-muted">
-                    <span className="flex items-center gap-1.5 text-text-secondary">
-                      <Calendar className="w-3.5 h-3.5 text-accent-purple" />
-                      {item.period}
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 text-accent-orange" />
-                      {item.location}
-                    </span>
-                  </div>
-                </div>
+                  {/* Summary */}
+                  <p className="text-sm text-text-secondary leading-relaxed font-light">
+                    {item.summary}
+                  </p>
 
-                {/* Summary */}
-                <p className="text-sm text-text-secondary leading-relaxed font-light">
-                  {item.summary}
-                </p>
-
-                {/* Bullet Points */}
-                <div className="space-y-2.5">
-                  <div className="text-xs font-mono uppercase tracking-wider text-text-muted">
-                    Key Achievements:
-                  </div>
-                  <ul className="space-y-2 text-sm text-text-secondary">
-                    {item.highlights.map((point, pidx) => (
-                      <li key={pidx} className="flex items-start gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-accent-purple shrink-0 mt-0.5" />
-                        <span className="leading-relaxed">{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Project Highlight Box if available (e.g. Google CX L1 Voice Agent) */}
-                {item.projectHighlight && (
-                  <div className="p-5 rounded-2xl bg-bg-primary border border-accent-purple/30 space-y-3">
-                    <div className="flex items-center gap-2 text-xs font-mono text-accent-purple font-semibold uppercase tracking-wider">
-                      <Sparkles className="w-4 h-4 text-accent-orange" />
-                      <span>Project Highlight: {item.projectHighlight.title}</span>
+                  {/* Bullet Points */}
+                  <div className="space-y-2">
+                    <div className="text-xs font-mono uppercase tracking-wider text-text-muted">
+                      Key Accomplishments:
                     </div>
-                    <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                      {item.projectHighlight.description}
-                    </p>
-                    <ul className="space-y-1.5 text-xs text-text-muted">
-                      {item.projectHighlight.points.map((pt, ptidx) => (
-                        <li key={ptidx} className="flex items-start gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-accent-orange shrink-0 mt-1" />
-                          <span>{pt}</span>
+                    <ul className="space-y-2 text-sm text-text-secondary font-light">
+                      {item.highlights.map((point, pidx) => (
+                        <li key={pidx} className="flex items-start gap-2.5">
+                          <CheckCircle2 className="w-4 h-4 text-accent-purple shrink-0 mt-0.5" />
+                          <span className="leading-relaxed">{point}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                )}
 
-                {/* Technologies */}
-                <div className="pt-4 border-t border-border/50 flex flex-wrap items-center gap-2">
-                  <span className="text-[11px] font-mono text-text-muted uppercase tracking-wider mr-2">
-                    Technologies:
-                  </span>
-                  {item.technologies.map((tech, tidx) => (
-                    <span
-                      key={tidx}
-                      className="px-2.5 py-1 rounded-md bg-bg-elevated text-xs font-mono text-text-secondary border border-border/60"
-                    >
-                      {tech}
+                  {/* Project Highlight */}
+                  {item.projectHighlight && (
+                    <div className="p-5 rounded-2xl border-l-2 border-accent-purple space-y-2 bg-transparent">
+                      <div className="flex items-center gap-2 text-xs font-mono text-accent-purple font-semibold uppercase tracking-wider">
+                        <Sparkles className="w-3.5 h-3.5 text-accent-orange" />
+                        <span>Project Highlight: {item.projectHighlight.title}</span>
+                      </div>
+                      <p className="text-xs sm:text-sm text-text-secondary leading-relaxed font-light">
+                        {item.projectHighlight.description}
+                      </p>
+                      <ul className="space-y-1.5 text-xs text-text-muted font-light pt-1">
+                        {item.projectHighlight.points.map((pt, ptidx) => (
+                          <li key={ptidx} className="flex items-start gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent-orange shrink-0 mt-1" />
+                            <span>{pt}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Technologies */}
+                  <div className="flex flex-wrap items-center gap-2 pt-2">
+                    <span className="text-[11px] font-mono text-text-muted uppercase tracking-wider mr-2">
+                      Stack:
                     </span>
-                  ))}
+                    {item.technologies.map((tech, tidx) => (
+                      <span
+                        key={tidx}
+                        className="px-2.5 py-0.5 rounded text-xs font-mono text-text-secondary border border-border/40"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
     </div>
   );
 };
-

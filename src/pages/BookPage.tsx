@@ -1,6 +1,5 @@
 import React from 'react';
 import { 
-  BookOpen, 
   ExternalLink, 
   Sparkles, 
   AlertTriangle, 
@@ -9,7 +8,6 @@ import {
   Layers, 
   Compass, 
   CheckCircle2, 
-  ShieldCheck,
   Camera,
   Palette,
   CheckCheck
@@ -19,151 +17,153 @@ import { bookData } from '../data/book';
 export const BookPage: React.FC = () => {
   return (
     <div className="space-y-24 sm:space-y-32 pt-24 sm:pt-28 lg:pt-32">
-      {/* 1. HERO SECTION: BOOK SHOWCASE */}
+      {/* 1. HERO SECTION: OPEN EDITORIAL SHOWCASE (NO BOXES) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative p-8 sm:p-12 lg:p-16 rounded-3xl bg-bg-card border border-border overflow-hidden">
-          {/* Subtle Warm Orange Illumination matching book aesthetic */}
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-orange/15 rounded-full blur-[160px] pointer-events-none" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Left Column: Book Details */}
+          <div className="lg:col-span-7 space-y-8">
+            <div className="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-accent-orange uppercase">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Published Work · 2026</span>
+            </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-            {/* Book Details Column */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent-orange/15 border border-accent-orange/30 text-accent-orange text-xs font-heading font-semibold tracking-wider uppercase">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Published Work · 2026</span>
-              </div>
-
-              <div>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-text-primary tracking-tight">
-                  Agents That Survive
-                </h1>
-                <p className="text-xs sm:text-sm font-mono text-accent-orange tracking-widest uppercase mt-3 leading-relaxed">
-                  {bookData.subtitle}
-                </p>
-              </div>
-
-              <div className="text-xs font-mono text-text-muted">
-                Written by <span className="text-text-primary font-semibold">Rajeev K. Dave</span>
-              </div>
-
-              <p className="text-base sm:text-lg text-text-secondary leading-relaxed font-light">
-                {bookData.fullOverview}
+            <div className="space-y-3">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-text-primary tracking-tight leading-tight">
+                Agents That Survive
+              </h1>
+              <p className="text-xs sm:text-sm font-mono text-accent-orange tracking-wider uppercase leading-relaxed max-w-xl">
+                {bookData.subtitle}
               </p>
+              <p className="text-sm text-text-muted font-light pt-1">
+                Written by <span className="text-text-primary font-medium">Rajeev K. Dave</span>
+              </p>
+            </div>
 
-              {/* Book Credits from Cover */}
-              <div className="p-4 rounded-2xl bg-bg-primary/80 border border-border/80 space-y-2">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-text-muted block">
-                  Book Production Credits:
-                </span>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                  {bookData.credits.map((credit, idx) => (
-                    <div key={idx} className="flex items-center gap-2">
-                      {credit.role === 'Photographer' && <Camera className="w-3.5 h-3.5 text-accent-orange" />}
-                      {credit.role === 'Designer' && <Palette className="w-3.5 h-3.5 text-accent-orange" />}
-                      {credit.role === 'Technical Reviewer' && <CheckCheck className="w-3.5 h-3.5 text-accent-orange" />}
-                      <div>
-                        <div className="text-[10px] font-mono text-text-muted uppercase">{credit.role}</div>
-                        <div className="font-heading font-semibold text-text-primary">{credit.name}</div>
-                      </div>
+            <p className="text-base sm:text-lg text-text-secondary leading-relaxed font-light">
+              {bookData.fullOverview}
+            </p>
+
+            {/* Production Credits - Clean Minimal Line Layout (No Boxes) */}
+            <div className="pt-6 border-t border-border/40 space-y-3">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-text-muted block">
+                Production Credits
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-1">
+                {bookData.credits.map((credit, idx) => (
+                  <div key={idx} className="space-y-0.5">
+                    <div className="flex items-center gap-1.5 text-[11px] font-mono text-accent-orange/90">
+                      {credit.role === 'Photographer' && <Camera className="w-3 h-3" />}
+                      {credit.role === 'Designer' && <Palette className="w-3 h-3" />}
+                      {credit.role === 'Technical Reviewer' && <CheckCheck className="w-3 h-3" />}
+                      <span>{credit.role}</span>
                     </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Purchase Callout */}
-              <div className="flex flex-wrap items-center gap-4 pt-4">
-                <a
-                  href={bookData.amazonUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-4 rounded-xl bg-accent-orange hover:bg-accent-orange-hover text-bg-primary font-heading font-semibold text-base transition-all duration-200 shadow-glow-orange flex items-center gap-2 group"
-                >
-                  <span>Buy on Amazon</span>
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-
-                <div className="text-xs font-mono text-text-muted flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-green-500" />
-                  <span>Available worldwide on Amazon</span>
-                </div>
+                    <div className="font-heading font-medium text-sm text-text-primary">
+                      {credit.name}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Book Cover Presentation */}
-            <div className="lg:col-span-5 flex justify-center items-center">
-              <div className="relative group">
-                {/* Radial warm glow */}
-                <div className="absolute inset-0 bg-accent-orange/30 blur-3xl rounded-full scale-110 group-hover:scale-125 transition-transform duration-700" />
+            {/* Purchase Callout */}
+            <div className="flex flex-wrap items-center gap-6 pt-4">
+              <a
+                href={bookData.amazonUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3.5 rounded-full bg-accent-orange hover:bg-accent-orange-hover text-bg-primary font-heading font-semibold text-sm transition-all duration-200 shadow-glow-orange flex items-center gap-2 group"
+              >
+                <span>Buy on Amazon</span>
+                <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              </a>
 
-                {/* Cover Display */}
-                <div className="relative p-3 rounded-2xl bg-bg-card/60 border border-accent-orange/40 shadow-2xl backdrop-blur-md">
-                  <img
-                    src={bookData.coverImageHd}
-                    alt="Agents That Survive - Book Cover by Rajeev K. Dave"
-                    className="w-72 sm:w-84 max-w-full h-auto rounded-xl shadow-[0_25px_60px_rgba(0,0,0,0.85)] transform transition-transform duration-500 group-hover:scale-[1.02]"
-                  />
-                  {/* Floor Glow Reflection */}
-                  <div className="w-full h-5 bg-gradient-to-b from-accent-orange/30 to-transparent blur-sm rounded-full mt-3" />
-                </div>
+              <span className="text-xs font-mono text-text-muted flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                Available worldwide on Amazon
+              </span>
+            </div>
+          </div>
+
+          {/* Right Column: Realistic 3D Book with Ambient Depth & Subtle Background Blur */}
+          <div className="lg:col-span-5 flex justify-center items-center relative py-8">
+            <div className="relative group w-full max-w-[380px] flex flex-col items-center">
+              {/* Soft, Diffuse Sunset Amber Atmosphere with Background Blur */}
+              <div 
+                className="absolute inset-0 -m-8 rounded-full blur-[80px] opacity-40 pointer-events-none transition-opacity duration-700 group-hover:opacity-60"
+                style={{
+                  background: 'radial-gradient(circle at 60% 45%, #FF831E 0%, #B84700 45%, transparent 75%)'
+                }}
+              />
+
+              {/* Secondary Soft Depth-of-Field Blur Disc */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-96 rounded-full bg-accent-purple/15 blur-[100px] pointer-events-none" />
+
+              {/* Realistic 3D Standing Book (Transparent PNG with Authentic Depth) */}
+              <div className="relative z-10 transition-transform duration-700 ease-out group-hover:-translate-y-2">
+                <img
+                  src={bookData.coverImageHd}
+                  alt="Agents That Survive by Rajeev K. Dave"
+                  className="w-full max-w-[340px] sm:max-w-[380px] h-auto object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.85)] filter contrast-[1.03]"
+                />
               </div>
+
+              {/* Subtle Ground Ambient Shadow & Reflection */}
+              <div className="w-3/4 h-6 bg-gradient-to-r from-transparent via-black/80 to-transparent blur-md rounded-full mt-2 z-0" />
+              <div className="w-1/2 h-2 bg-gradient-to-r from-transparent via-accent-orange/20 to-transparent blur-sm rounded-full -mt-2 z-0" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. THE FIVE CORE THEMES */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="max-w-2xl space-y-2">
-          <span className="text-xs font-heading uppercase tracking-wider text-accent-orange font-semibold">
-            Architectural Themes
-          </span>
-          <h2 className="text-3xl font-heading font-bold text-text-primary">
-            Key Themes Explored in the Book
-          </h2>
-          <p className="text-sm text-text-secondary leading-relaxed font-light">
-            Grounded in production deployments, moving past toy demos into mission-critical stability.
-          </p>
-        </div>
+      {/* 2. THE FIVE CORE THEMES - EDITORIAL NUMBERED SECTIONS (NO BOXES) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <div className="border-t border-border/40 pt-16 space-y-12">
+          <div className="max-w-2xl space-y-2">
+            <span className="text-xs font-mono uppercase tracking-widest text-accent-orange">
+              Architectural Foundations
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-heading font-bold text-text-primary">
+              Five Critical Themes Explored
+            </h2>
+            <p className="text-sm text-text-secondary leading-relaxed font-light">
+              Grounded in production deployments, moving past toy demos into mission-critical stability.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {bookData.inTheBook.map((theme, idx) => {
-            return (
-              <div
-                key={idx}
-                className="p-6 rounded-2xl bg-bg-card border border-border hover:border-accent-orange/40 transition-all duration-300 flex flex-col justify-between group"
-              >
-                <div className="space-y-4">
-                  <div className="w-10 h-10 rounded-xl bg-accent-orange/10 border border-accent-orange/30 flex items-center justify-center text-accent-orange group-hover:scale-110 transition-transform">
-                    {theme.icon === 'AlertTriangle' && <AlertTriangle className="w-5 h-5" />}
-                    {theme.icon === 'GitBranch' && <GitBranch className="w-5 h-5" />}
-                    {theme.icon === 'Cpu' && <Cpu className="w-5 h-5" />}
-                    {theme.icon === 'Layers' && <Layers className="w-5 h-5" />}
-                    {theme.icon === 'Compass' && <Compass className="w-5 h-5" />}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {bookData.inTheBook.map((theme, idx) => (
+              <div key={idx} className="space-y-3 pt-4 border-t border-border/30">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono text-accent-orange font-semibold">
+                    0{idx + 1}
+                  </span>
+                  <div className="text-text-muted">
+                    {theme.icon === 'AlertTriangle' && <AlertTriangle className="w-4 h-4 text-accent-orange/70" />}
+                    {theme.icon === 'GitBranch' && <GitBranch className="w-4 h-4 text-accent-orange/70" />}
+                    {theme.icon === 'Cpu' && <Cpu className="w-4 h-4 text-accent-orange/70" />}
+                    {theme.icon === 'Layers' && <Layers className="w-4 h-4 text-accent-orange/70" />}
+                    {theme.icon === 'Compass' && <Compass className="w-4 h-4 text-accent-orange/70" />}
                   </div>
-
-                  <h3 className="text-lg font-heading font-semibold text-text-primary group-hover:text-accent-orange transition-colors">
-                    {theme.title}
-                  </h3>
-
-                  <p className="text-xs sm:text-sm text-text-secondary leading-relaxed font-light">
-                    {theme.description}
-                  </p>
                 </div>
 
-                <div className="pt-4 mt-6 border-t border-border/50 text-[11px] font-mono text-text-muted">
-                  Theme 0{idx + 1}
-                </div>
+                <h3 className="text-lg font-heading font-semibold text-text-primary">
+                  {theme.title}
+                </h3>
+
+                <p className="text-xs sm:text-sm text-text-secondary leading-relaxed font-light">
+                  {theme.description}
+                </p>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* 3. WHO SHOULD READ THIS BOOK */}
+      {/* 3. WHO SHOULD READ THIS BOOK - MINIMAL EDITORIAL LIST (NO BOXES) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-12 rounded-3xl bg-bg-card border border-border space-y-8">
+        <div className="border-t border-border/40 pt-16 space-y-8">
           <div className="max-w-2xl space-y-2">
-            <span className="text-xs font-heading uppercase tracking-wider text-accent-purple font-semibold">
+            <span className="text-xs font-mono uppercase tracking-widest text-accent-purple">
               Target Audience
             </span>
             <h2 className="text-2xl sm:text-3xl font-heading font-bold text-text-primary">
@@ -171,14 +171,11 @@ export const BookPage: React.FC = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2">
             {bookData.audience.map((item, idx) => (
-              <div
-                key={idx}
-                className="p-5 rounded-2xl bg-bg-primary/60 border border-border flex items-start gap-3"
-              >
+              <div key={idx} className="flex items-start gap-4 pb-4 border-b border-border/20">
                 <CheckCircle2 className="w-5 h-5 text-accent-orange shrink-0 mt-0.5" />
-                <span className="text-sm font-heading font-medium text-text-secondary">
+                <span className="text-sm font-heading font-medium text-text-secondary leading-relaxed">
                   {item}
                 </span>
               </div>
@@ -187,18 +184,18 @@ export const BookPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. AUTHOR INFORMATION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-10 rounded-3xl bg-bg-card border border-border flex flex-col md:flex-row items-center gap-8">
-          <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border border-border shrink-0">
+      {/* 4. AUTHOR INFORMATION - OPEN EDITORIAL PROFILE (NO BOXES) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div className="border-t border-border/40 pt-16 flex flex-col md:flex-row items-start md:items-center gap-10">
+          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border border-border/60 shrink-0">
             <img
               src="/assets/images/rajeev-hero-portrait.jpg"
               alt="Rajeev Kumar Dave"
               className="w-full h-full object-cover object-top"
             />
           </div>
-          <div className="space-y-3">
-            <span className="text-xs font-heading uppercase tracking-wider text-accent-purple font-semibold">
+          <div className="space-y-2 max-w-3xl">
+            <span className="text-xs font-mono uppercase tracking-widest text-accent-purple">
               About the Author
             </span>
             <h3 className="text-2xl font-heading font-bold text-text-primary">
