@@ -60,7 +60,7 @@ export const HomePage: React.FC = () => {
                 className="px-7 py-3.5 rounded-full text-text-primary hover:text-white font-heading font-medium text-sm transition-all duration-200 flex items-center gap-2 group border border-border/70 hover:border-accent-orange/50"
               >
                 <BookOpen className="w-4 h-4 text-accent-orange" />
-                <span>Explore Book (2026)</span>
+                <span>Explore Book</span>
               </Link>
             </div>
           </div>

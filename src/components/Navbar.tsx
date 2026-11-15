@@ -25,8 +25,8 @@ export const Navbar: React.FC = () => {
     { label: 'About', path: '/about' },
     { label: 'Expertise', path: '/expertise' },
     { label: 'Experience', path: '/experience' },
-    { label: 'Book', path: '/book', badge: '2026' },
-    { label: 'Blog', path: '/blog', badge: 'Soon' },
+    { label: 'Book', path: '/book' },
+    { label: 'Blog', path: '/blog' },
   ];
 
   return (
@@ -72,11 +72,6 @@ export const Navbar: React.FC = () => {
                   }`}
                 >
                   {item.label}
-                  {item.badge && (
-                    <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-accent-orange/15 text-accent-orange border border-accent-orange/30 font-mono">
-                      {item.badge}
-                    </span>
-                  )}
                   {isActive && (
                     <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-accent-purple shadow-glow-purple rounded-full" />
                   )}
@@ -151,11 +146,6 @@ export const Navbar: React.FC = () => {
                 }`}
               >
                 <span>{item.label}</span>
-                {item.badge && (
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-accent-orange/15 text-accent-orange border border-accent-orange/30">
-                    {item.badge}
-                  </span>
-                )}
               </NavLink>
             );
           })}
@@ -166,7 +156,7 @@ export const Navbar: React.FC = () => {
               className="w-full py-2.5 px-4 rounded-lg bg-bg-card border border-border text-center text-sm font-heading font-medium text-accent-orange flex items-center justify-center gap-2"
             >
               <BookOpen className="w-4 h-4" />
-              <span>Agents That Survive (2026)</span>
+              <span>Agents That Survive</span>
             </Link>
             <Link
               to="/contact"

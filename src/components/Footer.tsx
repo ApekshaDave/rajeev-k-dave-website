@@ -85,15 +85,12 @@ export const Footer: React.FC = () => {
               <li>
                 <Link to="/book" className="text-accent-orange hover:underline transition-colors flex items-center gap-1.5 font-medium">
                   <BookOpen className="w-3.5 h-3.5" />
-                  <span>Agents That Survive (2026)</span>
+                  <span>Agents That Survive</span>
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="text-text-secondary hover:text-text-primary transition-colors flex items-center gap-1.5">
+                <Link to="/blog" className="text-text-secondary hover:text-text-primary transition-colors">
                   <span>Research & Blog</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-accent-orange/15 text-accent-orange border border-accent-orange/30">
-                    Coming Soon
-                  </span>
                 </Link>
               </li>
             </ul>
