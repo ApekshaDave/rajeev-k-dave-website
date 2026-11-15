@@ -11,7 +11,6 @@ import { ExpertisePage } from './pages/ExpertisePage';
 import { ExperiencePage } from './pages/ExperiencePage';
 import { BookPage } from './pages/BookPage';
 import { BlogArchivePage } from './pages/BlogArchivePage';
-import { BlogArticlePage } from './pages/BlogArticlePage';
 import { ContactPage } from './pages/ContactPage';
 
 export function App() {
@@ -29,7 +28,6 @@ export function App() {
               <Route path="/experience" element={<ExperiencePage />} />
               <Route path="/book" element={<BookPage />} />
               <Route path="/blog" element={<BlogArchivePage />} />
-              <Route path="/blog/:slug" element={<BlogArticlePage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
