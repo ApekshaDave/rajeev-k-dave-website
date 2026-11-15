@@ -8,7 +8,6 @@ import {
   Network, 
   ShieldCheck, 
   CheckCircle2, 
-  Sparkles,
   ExternalLink
 } from 'lucide-react';
 import { WaveVisual } from '../components/WaveVisual';
@@ -307,8 +306,7 @@ export const HomePage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Book Info Column */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-accent-orange uppercase">
-                <Sparkles className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center text-xs font-mono tracking-widest text-accent-orange uppercase">
                 <span>Featured Book · 2026 Publication</span>
               </div>
 

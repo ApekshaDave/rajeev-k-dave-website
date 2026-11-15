@@ -1,7 +1,6 @@
 import React from 'react';
 import { 
   ExternalLink, 
-  Sparkles, 
   AlertTriangle, 
   GitBranch, 
   Cpu, 
@@ -22,8 +21,7 @@ export const BookPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Book Details */}
           <div className="lg:col-span-7 space-y-8">
-            <div className="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-accent-orange uppercase">
-              <Sparkles className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center text-xs font-mono tracking-widest text-accent-orange uppercase">
               <span>Published Work · 2026</span>
             </div>
 

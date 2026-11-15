@@ -5,7 +5,6 @@ import {
   Cloud, 
   Layers, 
   Terminal, 
-  Sparkles,
   Workflow,
   ArrowRight
 } from 'lucide-react';
@@ -108,8 +107,7 @@ export const ExpertisePage: React.FC = () => {
               {domain.id === 'genai-agentic' && (
                 <div className="pt-8 border-t border-border/20 space-y-4">
                   <div className="flex items-center justify-between text-xs font-mono">
-                    <span className="text-accent-purple font-semibold flex items-center gap-2">
-                      <Sparkles className="w-4 h-4" />
+                    <span className="text-accent-purple font-semibold">
                       Enterprise Agentic Architecture Pipeline
                     </span>
                     <span className="text-text-muted">LangGraph · Semantic Kernel · Google ADK</span>

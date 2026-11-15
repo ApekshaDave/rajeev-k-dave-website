@@ -3,7 +3,6 @@ import {
   Calendar, 
   MapPin, 
   CheckCircle2, 
-  Sparkles, 
   ArrowRight 
 } from 'lucide-react';
 import { experienceData, impactMetrics } from '../data/experience';
@@ -178,7 +177,6 @@ export const ExperiencePage: React.FC = () => {
                   {item.projectHighlight && (
                     <div className="p-5 rounded-2xl border-l-2 border-accent-purple space-y-2 bg-transparent">
                       <div className="flex items-center gap-2 text-xs font-mono text-accent-purple font-semibold uppercase tracking-wider">
-                        <Sparkles className="w-3.5 h-3.5 text-accent-orange" />
                         <span>Project Highlight: {item.projectHighlight.title}</span>
                       </div>
                       <p className="text-xs sm:text-sm text-text-secondary leading-relaxed font-light">
